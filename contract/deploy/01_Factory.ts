@@ -2,16 +2,12 @@ import {HardhatRuntimeEnvironment} from 'hardhat/types';
 import {DeployFunction} from 'hardhat-deploy/types';
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
-  const {deploy, getArtifact} = hre.deployments
+  const entryPointAddress = (await hre.deployments.get("EntryPoint")).address
   const {deployer} = await hre.getNamedAccounts()
-  const artifact = await getArtifact("EntryPoint");
-  await deploy('EntryPoint', {
+  await hre.deployments.deploy('AyAyFactory', {
     from: deployer,
-    contract: artifact,
     log: true,
-    args: [],
-    deterministicDeployment: true
-    // Should already deployed
+    args: [entryPointAddress],
   });
 };
 export default func;
