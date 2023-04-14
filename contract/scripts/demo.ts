@@ -1,5 +1,5 @@
 import { EntryPoint__factory } from "@account-abstraction/contracts"
-import { deployments, ethers, getNamedAccounts } from "hardhat"
+import { deployments, ethers, getNamedAccounts, network } from "hardhat"
 import {
   AyAyFactory__factory,
   AyAyPaymaster__factory,
@@ -7,6 +7,12 @@ import {
   AyAyWallet__factory,
   TestJPYC__factory
 } from "../typechain-types"
+import { BusinessApi } from "../lib/BusinessApi"
+import { networksConfig } from "../helper"
+import { assertIsDefined, getChainIdFromProvider } from "../lib/utils"
+
+const networkConfigHelper = networksConfig[network.name]
+assertIsDefined(networkConfigHelper?.bundlerUrl)
 
 async function main() {
   const { deployer, shop1, consumer1 } = await getNamedAccounts()
@@ -46,6 +52,21 @@ async function main() {
     shop1_paymaster: shop1_paymaster.address,
     consumer1_wallet1Address: consumer1_wallet1.address
   })
+
+  // create BusinessApi that creates unsigned op, sends signed op
+  // This api does not store consumer info
+  // consumer signs it and businessApi.sendOp(signedOp)
+  // in bluetooth, transforming data should be simple
+  const business1Api = new BusinessApi({
+    entryPointAddress: entryPoint.address,
+    factoryAddress: factory.address,
+    paymasterAddress: shop1_paymaster.address,
+    receiverAddress: shop1_receiver.address,
+    bundlerUrl: networkConfigHelper?.bundlerUrl!,
+    chainId: await getChainIdFromProvider(ethers.provider),
+    provider: ethers.provider
+  })
+
 }
 
 main().catch((error) => {
