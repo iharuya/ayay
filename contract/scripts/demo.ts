@@ -11,12 +11,17 @@ import { BusinessApi } from "../lib/BusinessApi"
 import { networksConfig } from "../helper"
 import { assertIsDefined, getChainIdFromProvider } from "../lib/utils"
 import { getSignerFromAddress } from "../lib/hardhat-utils"
+import { getUserOpHash } from "@account-abstraction/utils"
+import { assert } from "chai"
 
 const networkConfigHelper = networksConfig[network.name]
 assertIsDefined(networkConfigHelper?.bundlerUrl)
+const consumer1_private_key = process.env.PRIVATE_KEY_2
+assertIsDefined(consumer1_private_key)
 
 async function main() {
   const { deployer, shop1, consumer1 } = await getNamedAccounts()
+  const chainId = await getChainIdFromProvider(ethers.provider)
   // consumer1 is master EOA, not ayay wallet
   const entryPointAddress = (await deployments.get("EntryPoint")).address
   const entryPoint = EntryPoint__factory.connect(
@@ -40,7 +45,7 @@ async function main() {
     ethers.provider
   )
 
-  const consumer1_defaultIndex = 0
+  const consumer1_defaultIndex = 1
   const consumer1_wallet1Address = await factory.getAddress(
     consumer1,
     consumer1_defaultIndex
@@ -74,6 +79,7 @@ async function main() {
   }
 
   const shop1PaymasterDeposit = await shop1_paymaster.getDeposit()
+  console.log({shop1PaymasterDeposit: ethers.utils.formatEther(shop1PaymasterDeposit)})
   if (shop1PaymasterDeposit.lt(ethers.utils.parseEther("0.1"))) {
     console.log("paymaster depositting and staking...")
     await shop1_paymaster
@@ -93,15 +99,41 @@ async function main() {
     paymasterAddress: shop1_paymaster.address,
     receiverAddress: shop1_receiver.address,
     bundlerUrl: networkConfigHelper?.bundlerUrl!,
-    chainId: await getChainIdFromProvider(ethers.provider),
+    chainId,
     provider: ethers.provider
   })
 
+  // consumer -> business [address]
+  // business -> consumer [unsignedOp]
+  // consumer -> business [signedOp]
+  // business -> bundler [signedOp]
+  // bundler -> business -> consumer [txHash]
   const unsignedOp = await business1Api.createUnsignedPaymentOp(
     { masterAddress: consumer1, index: consumer1_defaultIndex },
     { token: testJpyc.address, amount: ethers.utils.parseUnits("100", 6) }
   )
-  console.log({ unsignedOp })
+
+  const consumer1_wallet1_balanceBefore = await testJpyc.balanceOf(
+    consumer1_wallet1Address
+  )
+  const consumer1_masterWallet = new ethers.Wallet(consumer1_private_key!)
+  const message = ethers.utils.arrayify(
+    getUserOpHash(unsignedOp, entryPointAddress, chainId)
+  )
+  const signature = await consumer1_masterWallet.signMessage(message)
+  const signedOp = Object.assign({}, unsignedOp, {signature})
+  console.log({signedOp})
+
+  const paymentHash = await business1Api.sendOpToMempool(signedOp)
+  const txHash = await business1Api.getUserOpReceipt(paymentHash)
+  console.log({txHash})
+  const consumer1_wallet1_balanceAfter = await testJpyc.balanceOf(
+    consumer1_wallet1Address
+  )
+  assert.strictEqual(
+    consumer1_wallet1_balanceAfter,
+    consumer1_wallet1_balanceBefore.sub(ethers.utils.parseUnits("100", 6))
+  )
 }
 
 main().catch((error) => {

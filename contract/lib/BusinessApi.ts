@@ -152,6 +152,7 @@ export class BusinessApi {
         ? await this.getWalletInitCode(consumer)
         : undefined,
       callData: await this.encodePay(consumer, payment),
+      preVerificationGas: 50000, // stackup requires a lot...
       paymasterAndData: ethers.utils.hexConcat([this.paymaster.address])
     }
     const filledUserOp = await fillUserOp(partialOp, this.entryPoint)
