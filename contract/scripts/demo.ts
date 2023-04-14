@@ -10,6 +10,7 @@ import {
 import { BusinessApi } from "../lib/BusinessApi"
 import { networksConfig } from "../helper"
 import { assertIsDefined, getChainIdFromProvider } from "../lib/utils"
+import { getSignerFromAddress } from "../lib/hardhat-utils"
 
 const networkConfigHelper = networksConfig[network.name]
 assertIsDefined(networkConfigHelper?.bundlerUrl)
@@ -39,7 +40,11 @@ async function main() {
     ethers.provider
   )
 
-  const consumer1_wallet1Address = await factory.getAddress(consumer1, 0)
+  const consumer1_defaultIndex = 0
+  const consumer1_wallet1Address = await factory.getAddress(
+    consumer1,
+    consumer1_defaultIndex
+  )
   const consumer1_wallet1 = AyAyWallet__factory.connect(
     consumer1_wallet1Address,
     ethers.provider
@@ -53,10 +58,35 @@ async function main() {
     consumer1_wallet1Address: consumer1_wallet1.address
   })
 
-  // create BusinessApi that creates unsigned op, sends signed op
-  // This api does not store consumer info
-  // consumer signs it and businessApi.sendOp(signedOp)
-  // in bluetooth, transforming data should be simple
+  const deployerSigner = await getSignerFromAddress(deployer)
+  const shop1Signer = await getSignerFromAddress(shop1)
+
+  const consumer1_wallet1Balance = await testJpyc.balanceOf(
+    consumer1_wallet1Address
+  )
+  if (consumer1_wallet1Balance.lt(ethers.utils.parseUnits("1000", 6))) {
+    console.log(`Sending consumer1 wallet 1 1000 JPYC...`)
+    await (
+      await testJpyc
+        .connect(deployerSigner)
+        .transfer(consumer1_wallet1Address, ethers.utils.parseUnits("1000", 6))
+    ).wait(networkConfigHelper?.confirmations || 1)
+  }
+
+  const shop1PaymasterDeposit = await shop1_paymaster.getDeposit()
+  if (shop1PaymasterDeposit.lt(ethers.utils.parseEther("0.1"))) {
+    console.log("paymaster depositting and staking...")
+    await shop1_paymaster
+      .connect(shop1Signer)
+      .deposit({ value: ethers.utils.parseEther("0.1") })
+    await (
+      await shop1_paymaster
+        .connect(shop1Signer)
+        .addStake(10000, { value: ethers.utils.parseEther("0.1") })
+    ).wait(networkConfigHelper?.confirmations || 1)
+  }
+
+  // This api creates unsigned payment op, sends signed op. This does not store consumer info
   const business1Api = new BusinessApi({
     entryPointAddress: entryPoint.address,
     factoryAddress: factory.address,
@@ -67,6 +97,11 @@ async function main() {
     provider: ethers.provider
   })
 
+  const unsignedOp = await business1Api.createUnsignedPaymentOp(
+    { masterAddress: consumer1, index: consumer1_defaultIndex },
+    { token: testJpyc.address, amount: ethers.utils.parseUnits("100", 6) }
+  )
+  console.log({ unsignedOp })
 }
 
 main().catch((error) => {
