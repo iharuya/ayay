@@ -12,7 +12,7 @@ const config: HardhatUserConfig = {
     settings: {
       optimizer: {
         enabled: true,
-        runs: 800
+        runs: 2000
       }
     }
   },
@@ -20,6 +20,12 @@ const config: HardhatUserConfig = {
     deployer: {
       default: 0
     },
+    shop1: {
+      default: 1
+    },
+    consumer1: {
+      default: 2
+    }
   },
   defaultNetwork: "hardhat",
   networks: {
