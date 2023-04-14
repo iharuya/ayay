@@ -11,5 +11,7 @@ Payer can be offline!
   - Wallet has withdrawal limit to avoid a significant loss
 - Consumer (payer) interface in swift
 - Business (payee) interface in swift
-- Use bluetooth or NFC when signing user operations so that consumer can be offline
-- Utility server (nodejs), run ethersjs on Swift for signing
+- Use bluetooth when signing user operations so that consumer can be offline
+- Server (nodejs) to send user ops + utils
+- Signing key will never go out from the consumer app
+- FaceID to approve payments
