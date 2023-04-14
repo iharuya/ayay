@@ -12,3 +12,4 @@ Payer can be offline!
 - Consumer (payer) interface in swift
 - Business (payee) interface in swift
 - Use bluetooth or NFC when signing user operations so that consumer can be offline
+- Utility server (nodejs), run ethersjs on Swift for signing

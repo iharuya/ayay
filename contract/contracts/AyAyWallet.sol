@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.8.12;
+pragma solidity ^0.8.18;
 
 /* solhint-disable avoid-low-level-calls */
 /* solhint-disable no-inline-assembly */
@@ -9,6 +9,7 @@ import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "@account-abstraction/contracts/core/BaseAccount.sol";
 import "@account-abstraction/contracts/interfaces/IEntryPoint.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./interfaces/IAyAyReceiver.sol";
 
 contract AyAyWallet is BaseAccount {
     using ECDSA for bytes32;
@@ -40,7 +41,6 @@ contract AyAyWallet is BaseAccount {
         _entryPoint = entryPoint_;
         owner = owner_;
         LIMIT = 100000 * 10e6; // 10 man YEN
-
     }
 
     function _onlyOwner() internal view {
@@ -59,13 +59,13 @@ contract AyAyWallet is BaseAccount {
     }
 
     // JPYC
-    function pay(address receiver, IERC20 token, uint256 amount) external {
+    function pay(IAyAyReceiver receiver, IERC20 token, uint256 amount) external {
         _requireFromEntryPointOrOwner();
+        require(address(token) == receiver.currencyAddress());
         require(amount <= LIMIT, "Payment exceeds limit");
+        // @consider swap here
         token.transfer(address(receiver), amount);
     }
-
-    // remove execute()
 
     /// implement template method of BaseAccount
     function _validateAndUpdateNonce(
