@@ -30,7 +30,10 @@ function sendOp(opId, signature) {
     body: JSON.stringify({
         opId,
         signature
-    })
+    }),
+    headers: {
+        "Content-Type": "application/json"
+    }
     })
     .then((res) => res.json())
     .then((result) => {

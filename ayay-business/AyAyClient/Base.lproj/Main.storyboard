@@ -74,14 +74,29 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QrZ-Hf-KUt">
+                                <rect key="frame" x="739" y="127" width="31" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="31" id="32N-Ps-nq3"/>
+                                    <constraint firstAttribute="height" constant="34" id="fhf-vj-3vv"/>
+                                </constraints>
+                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="doc.on.doc" catalog="system"/>
+                                <connections>
+                                    <action selector="copyToClip:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4GP-vk-s4V"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="QrZ-Hf-KUt" firstAttribute="leading" secondItem="fM4-ck-pDX" secondAttribute="trailing" constant="20.5" id="1DD-4y-3n3"/>
                             <constraint firstItem="z1f-KD-yAu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="BF0-PM-qCJ"/>
                             <constraint firstItem="fM4-ck-pDX" firstAttribute="top" secondItem="z1f-KD-yAu" secondAttribute="bottom" constant="10" id="Si1-zT-kIW"/>
                             <constraint firstItem="fM4-ck-pDX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UUl-WA-057"/>
                             <constraint firstItem="z1f-KD-yAu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lgi-RC-bos"/>
+                            <constraint firstItem="QrZ-Hf-KUt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="107" id="sdZ-uf-DuX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -93,10 +108,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="116.60156249999999" y="-2.34375"/>
+            <point key="canvasLocation" x="575" y="-2"/>
         </scene>
     </scenes>
     <resources>
+        <image name="doc.on.doc" catalog="system" width="116" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

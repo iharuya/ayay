@@ -18,6 +18,7 @@ class ViewController: UIViewController, AyAyContractClientDelegate, UITableViewD
             currentHash = nil
         }
         if message.name == "txHashReceiver" {
+            print(message.body)
             messages.append("txHash " + (message.body as! String))
             tableView.reloadData()
         }
@@ -46,7 +47,7 @@ class ViewController: UIViewController, AyAyContractClientDelegate, UITableViewD
     
     func ayayContract(_ contract: AyAyContract, received payment: String) {
         DispatchQueue.main.sync {
-            executeScript("sendOp(\"\(payment)\", \(currentOpId!))")
+            executeScript("sendOp(\(currentOpId!), \"\(payment)\")")
             textField.text = ""
             toLabel.text = ""
             currentOpId = nil
@@ -124,9 +125,14 @@ class ViewController: UIViewController, AyAyContractClientDelegate, UITableViewD
     }
     
     
+    @IBAction func copyToClip(_ sender: Any) {
+        UIPasteboard.general.string = "0x17846F6BFA76c1D7D08873148C9813b6B1D98ce7"
+    }
+    
+    
     @IBAction func sendPayments(_ sender: Any) {
         textField.endEditing(true)
-        executeScript("createOp(\"\(contract!.customerMasterAddress!)\", \(textField.text!))")
+        executeScript("createOp( \"\(contract!.customerMasterAddress!)\", \(textField.text!))")
         checkoutButton.isEnabled = false
     }
     
@@ -160,5 +166,7 @@ class ViewController: UIViewController, AyAyContractClientDelegate, UITableViewD
             }
         })
     }
+    
+    
 }
 

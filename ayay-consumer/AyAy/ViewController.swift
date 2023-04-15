@@ -3,6 +3,7 @@ import WebKit
 
 class ViewController: UIViewController, WKScriptMessageHandler, WKNavigationDelegate {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+   
         if(message.name == handlerName) {
             address_key = message.body as? String
             UserDefaults.standard.set(address_key, forKey: "KEY")
@@ -101,11 +102,15 @@ class ViewController: UIViewController, WKScriptMessageHandler, WKNavigationDele
         }
         if let str2 = UserDefaults.standard.string(forKey: "PUBLIC") {
             address_pub = str2
+            print("master address")
+            print(str2)
         }
         if let str3 = UserDefaults.standard.string(forKey: "WALLET") {
             address_wallet = str3
             addressLabel.text = str3
             payButton.isEnabled = true
+            print("wallet address")
+            print(str3)
             let script = "getBalance(\"\(address_wallet!)\");"
             executeScript(script)
         }

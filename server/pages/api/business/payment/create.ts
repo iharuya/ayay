@@ -1,5 +1,5 @@
 import { businessApi } from "@/lib/BusinessApi"
-import {  testJpyc } from "@/lib/contracts"
+import { testJpyc } from "@/lib/contracts"
 import { prisma } from "@/lib/db"
 import { runMiddleware } from "@/lib/middleware"
 import { ethAddress, toChecksumAddress, withZod } from "@/lib/zod"
@@ -17,8 +17,8 @@ const PostSchema = z.object({
 
 const handlePost = withZod(PostSchema, async (req, res) => {
   const unsignedOp = await businessApi.createUnsignedPaymentOp(
-    {masterAddress: req.body.masterAddress, index: DEFAULT_WALLET_INDEX},
-    {token: testJpyc.address, amount: parseUnits(req.body.amount.toString(), 6)}
+    { masterAddress: req.body.masterAddress, index: DEFAULT_WALLET_INDEX },
+    { token: testJpyc.address, amount: parseUnits(req.body.amount.toString(), 6) }
   )
   const dbOp = await prisma.userOperation.create({
     data: {

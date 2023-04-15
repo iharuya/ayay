@@ -15,6 +15,7 @@ export function withZod<T extends ZodSchema>(
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const parsed = schema.safeParse(req)
     if (!parsed.success) {
+      console.warn(parsed.error.message)
       res.status(400).json({
         message: "Bad Request",
         issues: JSON.parse(parsed.error.message),
