@@ -16,7 +16,7 @@ import { HttpRpcClient } from "@account-abstraction/sdk"
 import { EntryPoint } from "@account-abstraction/contracts/types"
 import { EntryPoint__factory } from "@account-abstraction/contracts"
 import { UserOperation } from "@/types/UserOperation"
-import { fillUserOp } from "./user-operation"
+import { fillUserOp, getUserOpHash } from "./user-operation"
 import { entryPoint, factory, shop1_paymaster, shop1_receiver } from "./contracts"
 import { assertIsDefined } from "./utils"
 import { provider } from "./alchemy"
@@ -39,11 +39,6 @@ type BusinessApiParams = {
   bundlerUrl: string
   chainId: number
 }
-/**
- * 事業者が利用するApi
- * Swift上で動かしたい
- * 最悪Web apiサーバー上に置く
- */
 export class BusinessApi {
   private provider: JsonRpcProvider
   private entryPoint: EntryPoint
@@ -51,6 +46,7 @@ export class BusinessApi {
   private receiver: AyAyReceiver
   private paymaster: AyAyPaymaster
   private rpcClient: HttpRpcClient
+  private chainId: number
   constructor(params: BusinessApiParams) {
     this.provider = params.provider
     this.entryPoint = EntryPoint__factory.connect(
@@ -74,6 +70,7 @@ export class BusinessApi {
       params.entryPointAddress,
       params.chainId
     )
+    this.chainId = params.chainId
   }
 
   private async getWalletInitCode(params: ConsumerParams) {
@@ -165,6 +162,10 @@ export class BusinessApi {
   async sendOpToMempool(op: UserOperation) {
     const paymentHash = await this.rpcClient.sendUserOpToBundler(op)
     return paymentHash
+  }
+
+  getUserOpHash(op: UserOperation) {
+    return getUserOpHash(op, this.entryPoint.address, this.chainId)
   }
 }
 
