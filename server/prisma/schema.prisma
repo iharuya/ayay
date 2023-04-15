@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model UserOperation {
+  id Int @id @default(autoincrement())
+  sender String
+  nonce String
+  initCode String
+  callData String
+  callGasLimit String
+  verificationGasLimit String
+  preVerificationGas String
+  maxFeePerGas String
+  maxPriorityFeePerGas String
+  paymasterAndData String
+  signature String
+}
