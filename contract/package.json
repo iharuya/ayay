@@ -16,6 +16,8 @@
     "deploy:hardhat": "hardhat deploy --network hardhat",
     "deploy:localhost": "hardhat deploy --network localhost",
     "deploy:mumbai": "hardhat deploy --network mumbai",
+    "deploy:scrollAlpha": "hardhat deploy --network scrollAlpha",
+    "deploy:linea": "hardhat deploy --network linea",
     "typechain": "hardhat typechain",
     "clean": "hardhat clean"
   },
