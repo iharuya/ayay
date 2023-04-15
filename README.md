@@ -27,7 +27,7 @@ sequenceDiagram
   Consumer->>Server: createAyAyWallet(master address)
   Server->>Consumer: AyAy wallet address
   Note over Consumer: Deposit ERC20 to the address
-  Note over Consumer, Business: Bluetooth connection
+  Note over Consumer, Business: Bluetooth connection starts
   Consumer->>Business: Master address
   Business->>Server: createOp(address, amount)
   Server->>Business: unsigned op hash, op id
@@ -39,4 +39,5 @@ sequenceDiagram
   Bundler->>Server: op hash
   Server->>Business: tx hash
   Business->>Consumer: AyAy! (payment completed)
+  Note over Consumer, Business: Bluetooth connection ends
 ```

@@ -15,16 +15,24 @@ contract AyAyPaymaster is BasePaymaster {
         address owner_
     ) BasePaymaster(entryPoint_) {
         RECEIVER = receiver_;
-        MINIMAL_AMOUNT = 10 * 10e6;
+        MINIMAL_AMOUNT = 50 * 10e5; // 50YEN
         _transferOwnership(owner_);
     }
 
     function _validatePaymasterUserOp(
-        UserOperation calldata /*userOp*/,
+        UserOperation calldata userOp,
         bytes32 /*userOpHash*/,
         uint256 /* requiredPreFund */
-    ) internal pure override returns (bytes memory context, uint256 validationData) {
-        // @todo
+    ) internal view override returns (bytes memory context, uint256 validationData) {
+        bytes4 selector = bytes4(userOp.callData[:4]);
+        (address receiver, address token, uint256 amount) = abi.decode(
+            userOp.callData[4:],
+            (address, address, uint256)
+        );
+        require(selector == IAyAyWallet.pay.selector, "Unsupported calldata");
+        require(receiver == address(RECEIVER), "Incorrect receiver");
+        require(token == RECEIVER.currencyAddress(), "Incorrect token");
+        require(amount >= MINIMAL_AMOUNT, "Amount too small");
 
         return ("", 0);
     }

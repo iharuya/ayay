@@ -3,7 +3,6 @@ import { prisma } from "@/lib/db";
 import { runMiddleware } from "@/lib/middleware";
 import { NextApiHandler } from "next";
 
-
 const handler: NextApiHandler = async(req, res) => {
   await runMiddleware(req, res)
   if (req.method !== "GET") return res.status(405).json({message: "Method not allowed"})
