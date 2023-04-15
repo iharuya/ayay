@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>jsmod</title>
+  </head>
+  <body>
+    <button onclick="console.log(createMasterKey())">click</button>
+  </body>
+</html>
+
+<!--<html>-->
+<!--    <head>-->
+<!--        <meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
+<!--    </head>-->
+<!--    <body>-->
+<!--        <h1>Hello, WKWebView.</h1>-->
+<!--        <p>-->
+<!--        <button type="button" onClick='callAsynchronusNativeBridge()'>Asynchronus</button>-->
+<!--        <input id="asynchronusResult">-->
+<!--            </p>-->
+<!--            <p>-->
+<!--            <button type="button" onClick='callSynchronusNativeBridge()'>Synchronus</button>-->
+<!--            <input id="synchronusResult">-->
+<!--                </p>-->
+<!--            </body>-->
+<!--    <script>-->
+<!--        // JS -> Native (Asynchronus)-->
+<!--        function callAsynchronusNativeBridge() {-->
+<!--            var object = {-->
+<!--                "foo": "bar"-->
+<!--            }-->
+<!--            webkit.messageHandlers.nativeBridge.postMessage(object);-->
+<!--        }-->
+<!--        -->
+<!--        function callFromNative(value) {-->
+<!--            var element = document.getElementById("asynchronusResult");-->
+<!--            element.value = value;-->
+<!--        }-->
+<!--        -->
+<!--        // JS -> Native (Synchronus)-->
+<!--        function callSynchronusNativeBridge() {-->
+<!--            var object = {-->
+<!--                "foo": "bar"-->
+<!--            }-->
+<!--            var result = prompt(JSON.stringify(object))-->
+<!--            -->
+<!--            var element = document.getElementById("synchronusResult");-->
+<!--            element.value = JSON.parse(result).body-->
+<!--        }-->
+<!--    </script>-->
+<!--</html-->
