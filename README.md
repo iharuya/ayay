@@ -54,6 +54,10 @@ sequenceDiagram
 | `AyAyWallet`| `0x1De29a647d9826232a55A84f9154F4fF3E396e14` | One created from the factory |
 | `TestJPYC`| `0xF7f571309c7BFc2E6565cA6Ca13c093D78BcF90f` | ERC20 |
 
+### Bunzz
+- Each shop can easily deploy their own AyAyReceiver contract using Bunzz.
+- Video example: https://drive.google.com/file/d/1fW2ILnVorL1Eq7uoa3GukV6VpoCuusYc/view
+
 ## Future improvements
 - Support multi chain
 - Use NFC to make UX better
