@@ -18,6 +18,7 @@
     "deploy:mumbai": "hardhat deploy --network mumbai",
     "deploy:scrollAlpha": "hardhat deploy --network scrollAlpha",
     "deploy:linea": "hardhat deploy --network linea",
+    "deploy:chiado": "hardhat deploy --network chiado",
     "typechain": "hardhat typechain",
     "clean": "hardhat clean"
   },
