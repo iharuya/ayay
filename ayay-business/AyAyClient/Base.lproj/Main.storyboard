@@ -87,6 +87,29 @@
                                     <action selector="copyToClip:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4GP-vk-s4V"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDy-RJ-MAe">
+                                <rect key="frame" x="113" y="458" width="95" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g80-VR-lvP">
+                                <rect key="frame" x="202" y="451" width="65" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="JPYC"/>
+                                <connections>
+                                    <action selector="reloadBalance:" destination="BYZ-38-t0r" eventType="touchUpInside" id="32Y-ar-E7c"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="keg-7k-cCZ">
+                                <rect key="frame" x="34" y="458" width="61" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -100,6 +123,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="balanceLabel" destination="uDy-RJ-MAe" id="9o2-Hh-2NH"/>
                         <outlet property="checkoutButton" destination="ImZ-2A-14m" id="ABb-OA-89x"/>
                         <outlet property="tableView" destination="N1p-lQ-eiI" id="fMU-79-Ism"/>
                         <outlet property="textField" destination="wf5-Y7-yI9" id="6ui-OE-3ce"/>
@@ -108,7 +132,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="575" y="-2"/>
+            <point key="canvasLocation" x="574.8046875" y="-2.34375"/>
         </scene>
     </scenes>
     <resources>

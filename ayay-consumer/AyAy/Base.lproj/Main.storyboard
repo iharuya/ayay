@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AyAy Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKD-XZ-dq6">
-                                <rect key="frame" x="110.66666666666669" y="139" width="172" height="41"/>
+                                <rect key="frame" x="111.00000000000001" y="139" width="171.33333333333337" height="41"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -62,22 +62,33 @@
                                     <action selector="reloadBalance:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZLp-pS-Qt0"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oyv-uP-RBR">
+                                <rect key="frame" x="302.33333333333331" y="142" width="52.333333333333314" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="doc.on.doc" catalog="system"/>
+                                <connections>
+                                    <action selector="copyWalletAddress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="afs-XU-Q7S"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Oyv-uP-RBR" firstAttribute="centerY" secondItem="hKD-XZ-dq6" secondAttribute="centerY" id="251-SK-hzr"/>
                             <constraint firstItem="TPV-ca-pEU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2Pk-xv-G5j"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tDn-Ky-YsG" secondAttribute="bottom" constant="250" id="8EC-zH-ib1"/>
                             <constraint firstItem="fC9-5w-mRy" firstAttribute="top" secondItem="TPV-ca-pEU" secondAttribute="bottom" constant="40" id="JYX-C3-FTh"/>
                             <constraint firstItem="T8e-Aw-VXd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Kga-J7-z60"/>
                             <constraint firstItem="T8e-Aw-VXd" firstAttribute="centerY" secondItem="Xe8-4a-nUJ" secondAttribute="centerY" id="KnI-sU-XMT"/>
                             <constraint firstItem="Xe8-4a-nUJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="T8e-Aw-VXd" secondAttribute="trailing" constant="8" symbolic="YES" id="Kyu-av-DnI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Oyv-uP-RBR" secondAttribute="trailing" constant="38.333333333333314" id="Rm2-b0-Ykl"/>
                             <constraint firstItem="TPV-ca-pEU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="140" id="SJd-y6-vPI"/>
                             <constraint firstItem="hKD-XZ-dq6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="apL-QS-kz0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Xe8-4a-nUJ" secondAttribute="trailing" constant="30" id="arn-N5-Zcl"/>
                             <constraint firstItem="fC9-5w-mRy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eqL-Ej-5yR"/>
                             <constraint firstItem="T8e-Aw-VXd" firstAttribute="top" secondItem="Xe8-4a-nUJ" secondAttribute="top" id="h6T-IN-urq"/>
                             <constraint firstItem="T8e-Aw-VXd" firstAttribute="top" secondItem="fC9-5w-mRy" secondAttribute="bottom" constant="50" id="qYK-HV-BHB"/>
+                            <constraint firstItem="Oyv-uP-RBR" firstAttribute="leading" secondItem="hKD-XZ-dq6" secondAttribute="trailing" constant="20" id="qga-LU-9Sc"/>
                             <constraint firstItem="tDn-Ky-YsG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tnX-li-JmU"/>
                             <constraint firstItem="hKD-XZ-dq6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="xxC-b0-ux6"/>
                         </constraints>
@@ -168,6 +179,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="doc.on.doc" catalog="system" width="116" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

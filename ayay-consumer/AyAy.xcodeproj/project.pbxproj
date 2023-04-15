@@ -14,7 +14,6 @@
 		826D101A29E8482A00AA1B76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 826D101929E8482A00AA1B76 /* Assets.xcassets */; };
 		826D101D29E8482A00AA1B76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 826D101B29E8482A00AA1B76 /* LaunchScreen.storyboard */; };
 		826D102529E84BF600AA1B76 /* AyAyCustomerContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826D102429E84BF600AA1B76 /* AyAyCustomerContract.swift */; };
-		826D102729E8536A00AA1B76 /* AyAyEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826D102629E8536A00AA1B76 /* AyAyEngine.swift */; };
 		826D102C29E8556A00AA1B76 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 826D102929E8556A00AA1B76 /* index.html */; };
 		826D102D29E8556A00AA1B76 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 826D102A29E8556A00AA1B76 /* index.js */; };
 		826D102E29E8556A00AA1B76 /* ethers-5.2.umd.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 826D102B29E8556A00AA1B76 /* ethers-5.2.umd.min.js */; };
@@ -31,7 +30,6 @@
 		826D101C29E8482A00AA1B76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		826D101E29E8482A00AA1B76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		826D102429E84BF600AA1B76 /* AyAyCustomerContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AyAyCustomerContract.swift; sourceTree = "<group>"; };
-		826D102629E8536A00AA1B76 /* AyAyEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AyAyEngine.swift; sourceTree = "<group>"; };
 		826D102929E8556A00AA1B76 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		826D102A29E8556A00AA1B76 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		826D102B29E8556A00AA1B76 /* ethers-5.2.umd.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "ethers-5.2.umd.min.js"; sourceTree = "<group>"; };
@@ -75,7 +73,6 @@
 				826D101629E8482700AA1B76 /* Main.storyboard */,
 				827BD9FB29E932AC005BF0D9 /* PayViewController.swift */,
 				826D102429E84BF600AA1B76 /* AyAyCustomerContract.swift */,
-				826D102629E8536A00AA1B76 /* AyAyEngine.swift */,
 				826D101929E8482A00AA1B76 /* Assets.xcassets */,
 				826D101B29E8482A00AA1B76 /* LaunchScreen.storyboard */,
 				826D101E29E8482A00AA1B76 /* Info.plist */,
@@ -170,7 +167,6 @@
 				826D101529E8482700AA1B76 /* ViewController.swift in Sources */,
 				827BD9FC29E932AC005BF0D9 /* PayViewController.swift in Sources */,
 				826D102529E84BF600AA1B76 /* AyAyCustomerContract.swift in Sources */,
-				826D102729E8536A00AA1B76 /* AyAyEngine.swift in Sources */,
 				826D101129E8482700AA1B76 /* AppDelegate.swift in Sources */,
 				826D101329E8482700AA1B76 /* SceneDelegate.swift in Sources */,
 			);
@@ -322,6 +318,7 @@
 				DEVELOPMENT_TEAM = CAG3KW7X9M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AyAy/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "neccesary to admit payments";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -350,6 +347,7 @@
 				DEVELOPMENT_TEAM = CAG3KW7X9M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AyAy/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "neccesary to admit payments";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

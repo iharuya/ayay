@@ -28,7 +28,12 @@ class ViewController: UIViewController, WKScriptMessageHandler, WKNavigationDele
             UserDefaults.standard.set(address_wallet, forKey: "BALANCE")
             balanceLabel.textColor = .black
         }
-        if(message.name == handlerName6){
+        if(message.name == initErrorReceiver){
+            print("初手からオフラインは終了")
+            print(message.body)
+        }
+        if (message.name == getBalanceErrorReceiver) {
+            print("aaaa")
             balanceLabel.text = UserDefaults.standard.string(forKey: "BALANCE") ?? "0"
             balanceLabel.textColor = .gray
             print(message.body)
@@ -53,7 +58,8 @@ class ViewController: UIViewController, WKScriptMessageHandler, WKNavigationDele
     let handlerName3 = "ayayAccountWalletReceiver"
     let handlerName4 = "ayayDataReceiver"
     let handlerName5 = "ayayAccountBalanceReceiver"
-    let handlerName6 = "ayayReceive"
+    let initErrorReceiver = "ayayInitErrorReceiver"
+    let getBalanceErrorReceiver = "ayayGetBalanceErrorReceiver"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +74,8 @@ class ViewController: UIViewController, WKScriptMessageHandler, WKNavigationDele
         userContentController.add(self, name: handlerName3)
         userContentController.add(self, name: handlerName4)
         userContentController.add(self, name: handlerName5)
-        userContentController.add(self, name: handlerName6)
+        userContentController.add(self, name: initErrorReceiver)
+        userContentController.add(self, name: getBalanceErrorReceiver)
         let config = WKWebViewConfiguration()
         config.userContentController = userContentController
         let webPagePreference = WKWebpagePreferences()
@@ -82,6 +89,10 @@ class ViewController: UIViewController, WKScriptMessageHandler, WKNavigationDele
     @IBAction func reloadBalance(_ sender: Any) {
         let script = "getBalance(\"\(address_wallet!)\");"
         executeScript(script)
+    }
+    
+    @IBAction func copyWalletAddress(_ sender: Any) {
+        UIPasteboard.general.string = addressLabel.text!
     }
     
     @IBAction func payButtonPushed(_ sender: Any) {

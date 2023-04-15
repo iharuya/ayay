@@ -22,6 +22,23 @@ class ViewController: UIViewController, AyAyContractClientDelegate, UITableViewD
             messages.append("txHash " + (message.body as! String))
             tableView.reloadData()
         }
+        if message.name == "shopBalanceReceiver" {
+            let str = message.body as! String
+            
+            balanceLabel.text = str
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let str = messages[indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: true)
+        if str.contains("txHash ") {
+            let txHash = str.components(separatedBy: " ")[1]
+            let url = URL(string: "https://mumbai.polygonscan.com/tx/" + txHash)
+            if(UIApplication.shared.canOpenURL(url!)) {
+              UIApplication.shared.open(url!)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -76,7 +93,7 @@ class ViewController: UIViewController, AyAyContractClientDelegate, UITableViewD
     }
     
     
-
+    @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var checkoutButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textField: UITextField!
@@ -110,6 +127,7 @@ class ViewController: UIViewController, AyAyContractClientDelegate, UITableViewD
         userContentController.add(self, name: "ayayIdReceiver")
         userContentController.add(self, name: "ayayReceive")
         userContentController.add(self, name: "txHashReceiver")
+        userContentController.add(self, name: "shopBalanceReceiver")
         let config = WKWebViewConfiguration()
         config.userContentController = userContentController
         let webPagePreference = WKWebpagePreferences()
@@ -122,6 +140,7 @@ class ViewController: UIViewController, AyAyContractClientDelegate, UITableViewD
     override func viewDidAppear(_ animated: Bool) {
         contract = .init(deviceName: "AyAyShop")
         contract?.delegate = self
+        executeScript("getShopBalance()")
     }
     
     
@@ -129,6 +148,9 @@ class ViewController: UIViewController, AyAyContractClientDelegate, UITableViewD
         UIPasteboard.general.string = "0x17846F6BFA76c1D7D08873148C9813b6B1D98ce7"
     }
     
+    @IBAction func reloadBalance(_ sender: Any) {
+        executeScript("getShopBalance()")
+    }
     
     @IBAction func sendPayments(_ sender: Any) {
         textField.endEditing(true)

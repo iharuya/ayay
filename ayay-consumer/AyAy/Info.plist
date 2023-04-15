@@ -2,12 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSFaceIDUsageDescription</key>
-	<string>neccesary to admit payments</string>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_AyAy._tcp</string>
-		<string>_AyAy._tdp</string>
+		<string>_AyAy._udp</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

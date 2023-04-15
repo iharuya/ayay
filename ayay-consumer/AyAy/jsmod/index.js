@@ -17,7 +17,7 @@ function initCustomer() {
       webkit.messageHandlers.ayayAccountWalletReceiver.postMessage(ayayAddress)
     })
     .catch(e => {
-      webkit.messageHandlers.ayayReceive.postMessage(`failed!! error: ${e}`)
+      webkit.messageHandlers.ayayInitErrorReceiver.postMessage(`failed!! error: ${e}`)
     })
 }
 
@@ -39,7 +39,7 @@ function getBalance(walletAddress) {
         webkit.messageHandlers.ayayAccountBalanceReceiver.postMessage(result)
       })
       .catch(e => {
-        webkit.messageHandlers.ayayReceive.postMessage(`failed!! error: ${e}`)
+        webkit.messageHandlers.ayayGetBalanceErrorReceiver.postMessage(`failed!! error: ${e}`)
       })
 }
 
